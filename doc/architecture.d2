@@ -1,0 +1,42 @@
+direction: right
+
+user: {
+  shape: person
+}
+
+app: {
+  godot: godot frontend {
+    shape: image
+    icon: https://godotengine.org/assets/press/icon_color.svg
+  }
+
+  nginx: nginx auth proxy {
+    shape: image
+    icon: https://www.svgrepo.com/download/373924/nginx.svg
+  }
+
+  godot -> nginx
+  nginx -> auth
+  nginx -> leaderboard
+  nginx -> levels
+
+  auth: auth microservice {
+    user_db: user database {
+      shape: cylinder
+    }
+  }
+
+  leaderboard: leaderboard microservice {
+    ld_db: leaderboard database {
+      shape: cylinder
+    }
+  }
+
+  levels: level management microservice {
+    levels_db: levels storage {
+      shape: cylinder
+    }
+  }
+}
+
+user -> app.godot
