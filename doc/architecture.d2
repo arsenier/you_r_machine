@@ -4,7 +4,7 @@ user: {
   shape: person
 }
 
-app: {
+app: You R Machine {
   godot: godot frontend {
     shape: image
     icon: https://godotengine.org/assets/press/icon_color.svg
@@ -24,17 +24,39 @@ app: {
     user_db: user database {
       shape: cylinder
     }
+
+    table: User{
+        shape:sql_table
+        id: int {constraint: primary_key}
+        username: str
+        password_salted: str
+        is_admin: bool
+    }
   }
 
   leaderboard: leaderboard microservice {
     ld_db: leaderboard database {
       shape: cylinder
     }
+
+    table: Leaderboard{
+        shape:sql_table
+        id: int {constraint: primary_key}
+        user_id: int
+        score: int
+    }
   }
 
   levels: level management microservice {
     levels_db: levels storage {
       shape: cylinder
+    }
+
+    table: Levels{
+        shape:sql_table
+        id: int {constraint: primary_key}
+        creator_user_id: int
+        level_data: str
     }
   }
 }
