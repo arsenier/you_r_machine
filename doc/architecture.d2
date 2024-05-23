@@ -1,0 +1,64 @@
+direction: right
+
+user: {
+  shape: person
+}
+
+app: You R Machine {
+  godot: godot frontend {
+    shape: image
+    icon: https://godotengine.org/assets/press/icon_color.svg
+  }
+
+  nginx: nginx auth proxy {
+    shape: image
+    icon: https://www.svgrepo.com/download/373924/nginx.svg
+  }
+
+  godot -> nginx
+  nginx -> auth
+  nginx -> leaderboard
+  nginx -> levels
+
+  auth: auth microservice {
+    user_db: user database {
+      shape: cylinder
+    }
+
+    table: User{
+        shape:sql_table
+        id: int {constraint: primary_key}
+        username: str
+        password_salted: str
+        is_admin: bool
+    }
+  }
+
+  leaderboard: leaderboard microservice {
+    ld_db: leaderboard database {
+      shape: cylinder
+    }
+
+    table: Leaderboard{
+        shape:sql_table
+        id: int {constraint: primary_key}
+        user_id: int
+        score: int
+    }
+  }
+
+  levels: level management microservice {
+    levels_db: levels storage {
+      shape: cylinder
+    }
+
+    table: Levels{
+        shape:sql_table
+        id: int {constraint: primary_key}
+        creator_user_id: int
+        level_data: str
+    }
+  }
+}
+
+user -> app.godot

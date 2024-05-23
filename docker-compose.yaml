@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  api.gateway:
+    container_name: api.gateway
+    image: arsenier/yrm_proxy:${API_PROXY_VERSION}
+    volumes:
+      - ./build/nginx.conf:/etc/nginx/nginx.conf
+    env_file:
+      - .env
+    networks:
+      - app
+    ports:
+      - '${API_GATEWAY_PORT:-8000}:8000'
+
+  game:
+    container_name: you_r_machine_game
+    image: arsenier/yrm_godot:v1.1
+    networks:
+      - app
+    ports:
+      - 127.0.0.1:80:8000
+    restart: always
+
+  ms.leaderboard:
+    container_name: ms.leaderboard
+    image: arsenier/yrm_leaderboard:${MS_LEADERBOARD_VERSION}
+    volumes:
+      - ${DB_PATH_MS_LEADERBOARD}:/app/db
+    networks:
+      - app
+    restart: always
+    expose:
+      - "8000"
+
+  ms.auth:
+    container_name: ms.auth
+    image: arsenier/yrm_auth:${MS_AUTH_VERSION}
+    volumes:
+      - ${DB_PATH_MS_AUTH}:/app/db
+    networks:
+      - app
+    restart: always
+    expose:
+      - "8000"
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  apppgsql:
+    driver: local

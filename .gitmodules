@@ -1,0 +1,15 @@
+[submodule "you_r_machine_godot"]
+	path = you_r_machine_godot
+	url = git@github.com:arsenier/you_r_machine_godot.git
+[submodule "you_r_machine_leaderboard"]
+	path = you_r_machine_leaderboard
+	url = git@github.com:arsenier/you_r_machine_leaderboard.git
+[submodule "you_r_machine_auth"]
+	path = you_r_machine_auth
+	url = git@github.com:arsenier/you_r_machine_auth.git
+[submodule "you_r_machine_proxy"]
+	path = you_r_machine_proxy
+	url = git@github.com:arsenier/you_r_machine_proxy.git
+[submodule "you_r_machine_levels"]
+	path = you_r_machine_levels
+	url = git@github.com:arsenier/you_r_machine_levels.git
