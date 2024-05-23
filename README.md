@@ -6,3 +6,10 @@
 
 ![](doc/architecture.svg)
 
+## Запуск
+
+```
+docker compose up
+```
+
+После чего необходимо перейти на `http://localhost/`.
